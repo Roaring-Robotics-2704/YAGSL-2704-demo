@@ -50,4 +50,14 @@ public final class Constants
     public static final double RIGHT_X_DEADBAND = 0.1;
     public static final double TURN_CONSTANT    = 6;
   }
+  public static class IntakeConstants {
+    public static final int RMotorID = 21;
+    public static final int LMotorID = 22;
+  }
+  public static class ShooterConstants {
+    public static final int RShootMotorID = 23;
+    public static final int LShootMotorID = 24;
+    public static final int RFeedMotorID = 25;
+    public static final int LFeedMotorID = 26;
+  }
 }

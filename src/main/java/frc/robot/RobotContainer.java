@@ -69,7 +69,7 @@ public class RobotContainer
         () -> MathUtil.applyDeadband(driverXbox.getLeftY()/2, OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getLeftX()/2, OperatorConstants.LEFT_X_DEADBAND),
         () -> driverXbox.getRightX(),
-        () -> -driverXbox.getRightY(
+        () -> -driverXbox.getRightY());
     // Applies deadbands and inverts controls because joysticks
     // are back-right positive while robot
     // controls are front-left positive
