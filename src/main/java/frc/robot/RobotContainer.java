@@ -16,9 +16,12 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Shooter.CMDShooter;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
+import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
+import frc.robot.subsystems.Shooter.Intake;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 
@@ -35,13 +38,18 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                          "swerve/maxSwerve"));
-  private SendableChooser autoChooser = new SendableChooser<Command>();
+  private final Shooter Shooter = new Shooter();
+  private final Intake Intake = new Intake();
+  private CMDShooter shootCommand;
+  private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
+
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer()
   {
+    shootCommand = new CMDShooter(Intake, Shooter, driverXbox);
     autoChooser = AutoBuilder.buildAutoChooser();
     // Configure the trigger bindings
     configureBindings();
@@ -112,10 +120,12 @@ public class RobotContainer
                                    new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               ));
     driverXbox.y().whileTrue(drivebase.aimAtSpeaker(2));
+    driverXbox.rightBumper().onTrue(shootCommand.launch());
+    }
     // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
 
 
-  }
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
