@@ -33,8 +33,10 @@ public class CMDShooter extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.setIntake(xbox.getLeftTriggerAxis()-(xbox.getHID().getLeftBumper()?1:0));
-    shooter.setShooters(xbox.getRightTriggerAxis()-(xbox.getHID().getRightBumper()?1:0),xbox.getHID().getAButton()?1:0);
+   // intake.setIntake(xbox.getLeftTriggerAxis()-(xbox.getHID().getLeftBumper()?1:0));
+   // shooter.setShooters(xbox.getRightTriggerAxis()-(xbox.getHID().getRightBumper()?1:0),xbox.getHID().getAButton()?1:0);
+   
+
   }
 
   // Called once the command ends or is interrupted.
@@ -52,6 +54,13 @@ public class CMDShooter extends Command {
     RunCommand(()->shooter.setShooters(1, 0),shooter).repeatedly().withTimeout(warmupspeed)
     .andThen(
       new RunCommand(()->shooter.setShooters(1,1),shooter).repeatedly().withTimeout(shoottime)
+    );
+  }
+  
+  public Command intake() {
+    return new RunCommand(()->shooter.setShooters(0.0,0.25),shooter)
+    .alongWith(
+      new RunCommand(()->intake.setIntake(1))
     );
   }
 }

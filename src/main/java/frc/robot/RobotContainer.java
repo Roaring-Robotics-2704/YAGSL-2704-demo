@@ -121,6 +121,7 @@ public class RobotContainer
                               ));
     driverXbox.y().whileTrue(drivebase.aimAtSpeaker(2));
     driverXbox.rightBumper().onTrue(shootCommand.launch());
+    driverXbox.leftBumper().whileTrue(shootCommand.intake());
     }
     // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
 
