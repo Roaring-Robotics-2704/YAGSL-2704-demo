@@ -11,8 +11,8 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  private final WPI_TalonSRX RIntakeMotor = new WPI_TalonSRX(Constants.IntakeConstants.RMotorID);
-  private final WPI_TalonSRX LIntakeMotor = new WPI_TalonSRX(Constants.IntakeConstants.LMotorID);
+  private final WPI_TalonSRX LowerIntakeMotor = new WPI_TalonSRX(Constants.IntakeConstants.LowerIntakeMotorID);
+  private final WPI_TalonSRX UpperIntakeMotor = new WPI_TalonSRX(Constants.IntakeConstants.UpperIntakeMotorID);
   public Intake() {
      
 
@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void setIntake(double powerPercent) {
-    RIntakeMotor.set(powerPercent);
-    LIntakeMotor.set(powerPercent);
+    LowerIntakeMotor.set(powerPercent);
+    UpperIntakeMotor.set(powerPercent);
   }
 }

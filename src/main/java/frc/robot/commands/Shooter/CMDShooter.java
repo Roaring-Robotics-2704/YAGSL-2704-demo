@@ -31,7 +31,7 @@ public class CMDShooter extends Command {
   @Override
   public void execute() {
     intake.setIntake(xbox.getLeftTriggerAxis()-(xbox.getHID().getLeftBumper()?1:0));
-    shooter.setMotors(xbox.getRightTriggerAxis()-(xbox.getHID().getRightBumper()?1:0),xbox.getHID().getAButton()?1:0);
+    shooter.setShooters(xbox.getRightTriggerAxis()-(xbox.getHID().getRightBumper()?1:0),xbox.getHID().getAButton()?1:0);
   }
 
   // Called once the command ends or is interrupted.

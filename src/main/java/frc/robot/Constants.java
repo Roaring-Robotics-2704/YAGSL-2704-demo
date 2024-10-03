@@ -51,13 +51,13 @@ public final class Constants
     public static final double TURN_CONSTANT    = 6;
   }
   public static class IntakeConstants {
-    public static final int RMotorID = 21;
-    public static final int LMotorID = 22;
+    public static final int UpperIntakeMotorID = 11;
+    public static final int LowerIntakeMotorID = 12;
   }
   public static class ShooterConstants {
-    public static final int RShootMotorID = 23;
-    public static final int LShootMotorID = 24;
-    public static final int RFeedMotorID = 25;
-    public static final int LFeedMotorID = 26;
+    public static final int RShootMotorID = 13;
+    public static final int LShootMotorID = 14;
+    public static final int RFeedMotorID = 15;
+    public static final int LFeedMotorID = 16;
   }
 }
