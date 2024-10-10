@@ -35,7 +35,14 @@ public class CMDShooter extends Command {
   public void execute() {
    // intake.setIntake(xbox.getLeftTriggerAxis()-(xbox.getHID().getLeftBumper()?1:0));
    // shooter.setShooters(xbox.getRightTriggerAxis()-(xbox.getHID().getRightBumper()?1:0),xbox.getHID().getAButton()?1:0);
-   
+   if (xbox.leftBumper().getAsBoolean()) {
+    intake();
+   } else {
+    stopIntake();
+   }
+   if (xbox.rightBumper().getAsBoolean()) {
+    launch();
+   }
 
   }
 
@@ -54,6 +61,8 @@ public class CMDShooter extends Command {
     RunCommand(()->shooter.setShooters(1, 0),shooter).repeatedly().withTimeout(warmupspeed)
     .andThen(
       new RunCommand(()->shooter.setShooters(1,1),shooter).repeatedly().withTimeout(shoottime)
+    .andThen(
+      new RunCommand(()->shooter.setShooters(0,0),shooter))
     );
   }
   
@@ -62,6 +71,10 @@ public class CMDShooter extends Command {
     .alongWith(
       new RunCommand(()->intake.setIntake(1))
     );
+  }
+  public Command stopIntake() {
+    return new RunCommand(()->intake.setIntake(0)).alongWith(
+      new RunCommand(()->shooter.setShooters(0,0)));
   }
 }
 
